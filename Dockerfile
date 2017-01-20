@@ -4,7 +4,7 @@
 
 FROM debian
 MAINTAINER darius BERNARD
-
+EXPOSE 80
 # Install dependencies
 RUN apt-get update 
 RUN apt-get -y install \
@@ -52,6 +52,7 @@ RUN echo "ServerName scanner.local" >> /etc/apache2/sites-available/000-default.
 
 # Add launcher
 ADD start.sh /start.sh
+
 
 # Start scan service(s)
 CMD /start.sh
