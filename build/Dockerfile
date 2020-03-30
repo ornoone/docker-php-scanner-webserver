@@ -2,7 +2,9 @@
 #
 # VERSION               0.0.1
 
-FROM debian
+FROM debian:stretch
+ARG proxy=""
+RUN test -z "$proxy" ||  echo "Acquire { Retries \"0\"; HTTP { Proxy \"$proxy\"; };}; " | tee /etc/apt/apt.conf.d/30proxy
 MAINTAINER darius BERNARD
 EXPOSE 80
 # Install dependencies
@@ -16,11 +18,11 @@ RUN apt-get -y install \
     tesseract-ocr \
     tesseract-ocr-eng \
     apache2 \
-    libapache2-mod-php5 \
+    libapache2-mod-php \
     coreutils \
-    php5 \
-    php5-json \
-    php5-curl \
+    php \
+    php-json \
+    php-curl \
     tar \
     zip \
     php-fpdf \ 

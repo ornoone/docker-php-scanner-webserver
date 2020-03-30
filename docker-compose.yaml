@@ -1,0 +1,18 @@
+# docker run -d --restart always -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -e SESSIONNAME=elmindreda -e ADMINPASSWORD="goblet-violet" --name ark -v /home/ark:/ark turzam/ark
+version: '3'
+
+services:
+  php-scanner-webserver:
+    container_name: php-scanner-webserver
+    build: 
+      context: ./build
+      args:
+        proxy: $proxy
+    volumes:
+      - ./volumes/scans:/var/www/html/scans
+      - ./volumes/config:/var/www/html/config
+    ports:
+      - "8088:80"
+    restart: always
+    devices:
+      - "/dev/bus/usb:/dev/bus/usb"
